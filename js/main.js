@@ -31,7 +31,7 @@ function setList(list) {
             '<td>'+ list[chave].desc + '</td>\n' +
             '<td>'+ list[chave].qtd + '</td>\n' +
             '<td>'+ formatValor(list[chave].valor) + '</td>\n' +
-            '<td><button onclick="setUpdate('+chave+')" class="btn btn-primary">Editar</button> | <button class="btn btn-danger">Deletar</button></td>\n' +
+            '<td><button onclick="setUpdate('+chave+')" class="btn btn-primary">Editar</button> | <button onclick="deletarProduto('+ chave + ')" class="btn btn-danger">Deletar</button></td>\n' +
             '</tr>';
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
@@ -134,6 +134,32 @@ function editarProduto() {
     list[idProduto] = getCamposFormulario();;
     setList(list);
     reset();
+}
+
+/**
+ *
+ * @param int id
+ * @return void
+ */
+function deletarProduto(id) {
+    if(confirm("Realmente deseja deletar o produto ?")){
+        if(id == list.length - 1){
+            // deleta o último elemento
+            list.pop();
+        }else if(id == 0){
+            // deleta o primeiro elemento
+            list.shift();
+        }else{
+            // recebe um novo array da posição 0 até a posição anterior do id ( ignorando a posição id ).
+            var inicioArray = list.slice(0, id);
+
+            // cria um novo array, da posição após o id até o final ( ignorando a posição id ).
+            var finalArray = list.slice(id + 1);
+
+            list = inicioArray.concat(finalArray);
+        }
+        setList(list);
+    }
 }
 
 setList(list);
