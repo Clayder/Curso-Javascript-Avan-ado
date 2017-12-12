@@ -36,12 +36,28 @@ function setList(list) {
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
 }
 
+/**
+ * Formata um float
+ * @param valor
+ * @returns {string}
+ */
 function formatValor(valor) {
     // deixo a limitação em 2 casas decimais e no final concateno com "" para transformar em string
     var str = parseFloat(valor).toFixed(2)+"";
     str = str.replace('.', ',');
     str = "R$ " + str;
     return str;
+}
+
+/**
+ * Cadastra o novo produto
+ */
+function addProduto() {
+    var desc = document.getElementById("desc").value;
+    var qtd = document.getElementById("qtd").value;
+    var valor = document.getElementById("valor").value;
+    list.unshift({"desc": desc, "qtd": qtd, "valor": valor});
+    setList(list);
 }
 setList(list);
 console.log(getTotal(list));
