@@ -72,6 +72,5 @@ function reset() {
     document.getElementById("qtd").value = "";
     document.getElementById("valor").value = "";
 }
-
 setList(list);
 console.log(getTotal(list));
