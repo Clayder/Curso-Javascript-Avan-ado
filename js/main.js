@@ -37,6 +37,7 @@ function setList(list) {
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
     getTotal(list);
+    saveListStorage(list);
 }
 
 /**
@@ -164,5 +165,28 @@ function deletarProduto(id) {
     }
 }
 
-setList(list);
-console.log(getTotal(list));
+/**
+ * Salva os dados no localStorage
+ * @param list
+ * @return void
+ */
+function saveListStorage(list) {
+    // transforma o array em json
+    var prodJson = JSON.stringify(list);
+    localStorage.setItem("list", prodJson);
+}
+
+/**
+ * Inicia o localStorage
+ * @return void
+ */
+function initStorage() {
+    var prodJson = localStorage.getItem("list");
+    if(prodJson){
+        // transforma de json para array
+        list = JSON.parse(prodJson);
+    }
+    setList(list);
+}
+
+initStorage();
