@@ -31,7 +31,7 @@ function setList(list) {
             '<td>'+ list[chave].desc + '</td>\n' +
             '<td>'+ list[chave].qtd + '</td>\n' +
             '<td>'+ formatValor(list[chave].valor) + '</td>\n' +
-            '<td>Editar | Deletar</td>\n' +
+            '<td><button onclick="setUpdate(chave)" class="btn btn">Editar</button> | <button class="btn btn-danger">Deletar</button></td>\n' +
             '</tr>';
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
@@ -71,6 +71,17 @@ function reset() {
     document.getElementById("desc").value = "";
     document.getElementById("qtd").value = "";
     document.getElementById("valor").value = "";
+}
+
+function setCamposFormulario(obj) {
+    document.getElementById("desc").value = obj.desc;
+    document.getElementById("qtd").value = obj.qtd;
+    document.getElementById("valor").value = obj.valor;
+}
+
+function setUpdate(id){
+    var obj = list[id];
+    
 }
 setList(list);
 console.log(getTotal(list));
