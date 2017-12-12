@@ -68,11 +68,14 @@ function addProduto() {
  * @return void
  */
 function reset() {
-    document.getElementById("desc").value = "";
-    document.getElementById("qtd").value = "";
-    document.getElementById("valor").value = "";
+    var obj = {"desc": "", "qtd": "", "valor": ""};
+    setCamposFormulario(obj);
 }
 
+/**
+ *
+ * @param obj
+ */
 function setCamposFormulario(obj) {
     document.getElementById("desc").value = obj.desc;
     document.getElementById("qtd").value = obj.qtd;
@@ -81,7 +84,7 @@ function setCamposFormulario(obj) {
 
 function setUpdate(id){
     var obj = list[id];
-    
+
 }
 setList(list);
 console.log(getTotal(list));
