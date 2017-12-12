@@ -14,6 +14,7 @@ function getTotal(list) {
     for(var chave in list){
         total += list[chave].valor * list[chave].qtd;
     }
+    document.getElementById('totalValue').innerHTML = formatValor(total);
     return total;
 }
 
@@ -35,6 +36,7 @@ function setList(list) {
             '</tr>';
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
+    getTotal(list);
 }
 
 /**
