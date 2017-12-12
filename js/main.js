@@ -31,7 +31,7 @@ function setList(list) {
             '<td>'+ list[chave].desc + '</td>\n' +
             '<td>'+ list[chave].qtd + '</td>\n' +
             '<td>'+ formatValor(list[chave].valor) + '</td>\n' +
-            '<td><button onclick="setUpdate(chave)" class="btn btn">Editar</button> | <button class="btn btn-danger">Deletar</button></td>\n' +
+            '<td><button onclick="setUpdate('+chave+')" class="btn btn-primary">Editar</button> | <button class="btn btn-danger">Deletar</button></td>\n' +
             '</tr>';
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
@@ -55,10 +55,8 @@ function formatValor(valor) {
  * @return void
  */
 function addProduto() {
-    var desc = document.getElementById("desc").value;
-    var qtd = document.getElementById("qtd").value;
-    var valor = document.getElementById("valor").value;
-    list.unshift({"desc": desc, "qtd": qtd, "valor": valor});
+    var obj = getCamposFormulario();
+    list.unshift(obj);
     setList(list);
     reset();
 }
@@ -82,9 +80,61 @@ function setCamposFormulario(obj) {
     document.getElementById("valor").value = obj.valor;
 }
 
+/**
+ * Recupera os dados do formulário
+ * @return {{desc: (string|Number|*), qtd: (string|Number|*), valor: (string|Number|*)}}
+ */
+function getCamposFormulario() {
+    var desc = document.getElementById("desc").value;
+    var qtd = document.getElementById("qtd").value;
+    var valor = document.getElementById("valor").value;
+    return {"desc": desc, "qtd": qtd, "valor": valor};
+}
+
+/**
+ *
+ * @param int id
+ * @return void
+ */
 function setUpdate(id){
     var obj = list[id];
-
+    setCamposFormulario(obj);
+    btnFormulario('none', 'inline-block', 'inline-block');
+    // insere o valor do id no campo hidden do formulário de cadastro/edicao
+    document.getElementById('idProduto').value = id;
 }
+
+/**
+ * Cancela a edição
+ * @return void
+ */
+function cancelarEdicao() {
+    btnFormulario('inline-block', 'none', 'none');
+}
+
+/**
+ * Realiza a ação de mostrar ou esconder um button
+ * @param String btnAdd button cadastrar
+ * @param String btnUpdate button editar
+ * @param String btnCacel button cancelar
+ * @return void
+ */
+function btnFormulario(btnAdd, btnUpdate, btnCacel){
+    document.getElementById("btnUpdate").style.display = btnUpdate;
+    document.getElementById("btnCancel").style.display = btnCacel;
+    document.getElementById("btnAdd").style.display = btnAdd;
+}
+
+/**
+ * Realiza a edição do produto
+ * @return void
+ */
+function editarProduto() {
+    var idProduto = document.getElementById('idProduto').value;
+    list[idProduto] = getCamposFormulario();;
+    setList(list);
+    reset();
+}
+
 setList(list);
 console.log(getTotal(list));

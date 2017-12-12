@@ -80,6 +80,7 @@
 
 <div class="container-fluid">
     <div class="form-inline">
+        <input id="idProduto" type="hidden" />
         <div class="form-group">
             <label for="descricao">Descrição: </label>
             <input type="text" class="form-control" id="desc">
@@ -92,7 +93,9 @@
             <label for="valor">Valor: </label>
             <input type="text" class="form-control" id="valor">
         </div>
-        <button onclick="addProduto()" class="btn btn-success">Cadastrar</button>
+        <button onclick="addProduto()" id="btnAdd" class="btn btn-success">Cadastrar</button>
+        <button onclick="editarProduto()" id="btnUpdate" style="display: none" class="btn btn-primary">Editar</button>
+        <button onclick="cancelarEdicao()" id="btnCancel" style="display: none" class="btn btn">Cancelar</button>
     </div>
     <table class="table table-hover">
         <thead>
