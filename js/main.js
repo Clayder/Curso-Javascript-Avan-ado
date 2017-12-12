@@ -20,6 +20,7 @@ function getTotal(list) {
 /**
  *
  * @param list
+ * @return void
  */
 function setList(list) {
     var tabela = "";
@@ -50,7 +51,8 @@ function formatValor(valor) {
 }
 
 /**
- * Cadastra o novo produto
+ * Cadastrar o novo produto
+ * @return void
  */
 function addProduto() {
     var desc = document.getElementById("desc").value;
@@ -58,6 +60,18 @@ function addProduto() {
     var valor = document.getElementById("valor").value;
     list.unshift({"desc": desc, "qtd": qtd, "valor": valor});
     setList(list);
+    reset();
 }
+
+/**
+ * Reseta os campos do formulário
+ * @return void
+ */
+function reset() {
+    document.getElementById("desc").value = "";
+    document.getElementById("qtd").value = "";
+    document.getElementById("valor").value = "";
+}
+
 setList(list);
 console.log(getTotal(list));
