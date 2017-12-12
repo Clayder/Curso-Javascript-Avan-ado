@@ -17,19 +17,31 @@ function getTotal(list) {
     return total;
 }
 
+/**
+ *
+ * @param list
+ */
 function setList(list) {
     var tabela = "";
     for(var chave in list){
+        var id = parseInt(chave) + 1;
         tabela += '<tr>\n' +
-            '<th scope="row">'+ chave +'</th>\n' +
+            '<th scope="row">'+ id +'</th>\n' +
             '<td>'+ list[chave].desc + '</td>\n' +
             '<td>'+ list[chave].qtd + '</td>\n' +
-            '<td>'+ list[chave].valor + '</td>\n' +
+            '<td>'+ formatValor(list[chave].valor) + '</td>\n' +
             '<td>Editar | Deletar</td>\n' +
             '</tr>';
     }
     document.getElementById('corpo-tabela-compra').innerHTML = tabela;
 }
 
+function formatValor(valor) {
+    // deixo a limitação em 2 casas decimais e no final concateno com "" para transformar em string
+    var str = parseFloat(valor).toFixed(2)+"";
+    str = str.replace('.', ',');
+    str = "R$ " + str;
+    return str;
+}
 setList(list);
 console.log(getTotal(list));
