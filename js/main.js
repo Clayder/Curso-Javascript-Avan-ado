@@ -17,4 +17,19 @@ function getTotal(list) {
     return total;
 }
 
+function setList(list) {
+    var tabela = "";
+    for(var chave in list){
+        tabela += '<tr>\n' +
+            '<th scope="row">'+ chave +'</th>\n' +
+            '<td>'+ list[chave].desc + '</td>\n' +
+            '<td>'+ list[chave].qtd + '</td>\n' +
+            '<td>'+ list[chave].valor + '</td>\n' +
+            '<td>Editar | Deletar</td>\n' +
+            '</tr>';
+    }
+    document.getElementById('corpo-tabela-compra').innerHTML = tabela;
+}
+
+setList(list);
 console.log(getTotal(list));
