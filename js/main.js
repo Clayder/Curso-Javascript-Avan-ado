@@ -112,6 +112,7 @@ function setUpdate(id){
  * @return void
  */
 function cancelarEdicao() {
+    reset();
     btnFormulario('inline-block', 'none', 'none');
 }
 
